@@ -11,8 +11,8 @@ import (
 func init() {
 	Command.AddCommand(&cobra.Command{
 		Use:   "run",
-		Short: "run one punch man",
-		Long:  `config source operator sink, start one punch man`,
+		Short: "run vesta",
+		Long:  `config source operator sink, start vesta`,
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) == 0 {
 				panic("config file can't be nil")
