@@ -1,0 +1,32 @@
+log-level = "debug"
+state-dir = "/Users/klein/Temp/geddon/status"
+
+[source.test]
+type = "spooldir"
+scan = "/Users/klein/Temp/geddon/log"
+backup = "/Users/klein/Temp/geddon/backup"
+pattern = ".*.log"
+outputs = ["operator.script"]
+
+[operator.script]
+type = "script"
+script = """
+event.Message= "asdasd"
+event.Meta.tt= "3123"
+"""
+outputs = ["operator.filter"]
+
+[operator.filter]
+type = "filter"
+
+condition = """event.Meta.tt!="3123"
+"""
+
+outputs = ["sink.*"]
+
+[sink.echo]
+type = "echo"
+batch = 100
+
+
+
