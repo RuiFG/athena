@@ -12,6 +12,7 @@ import (
 )
 
 func init() {
+	delete(stdlib.BuiltinModules, "os")
 	Command.AddCommand(&cobra.Command{
 		Use:   "tengo",
 		Short: "run REPL",

@@ -1,0 +1,39 @@
+[global]
+log-level = "debug"
+state-dir = "/Users/klein/Temp/geddon/status"
+
+[source.test]
+type = "spooldir"
+scan = "/Users/klein/Temp/geddon/log"
+backup = "/Users/klein/Temp/geddon/backup"
+pattern = ".*.log"
+select = "replicating"
+outputs = ["operator.script"]
+
+[operator.script]
+type = "tengo-script"
+script = """
+event.message= "asdasd"
+event.meta.tt= 3123
+"""
+select = "replicating"
+outputs = ["operator.aggregate"]
+
+[operator.aggregate]
+type = "tengo-aggregate"
+id = "id=string(event.message)"
+value = """
+if is_undefined(value) {
+    value = {"result":0}
+}
+value.result += event.meta.tt
+"""
+select = "replicating"
+outputs = ["sink.*"]
+
+[sink.echo]
+type = "echo"
+batch = 1
+
+
+

@@ -1,6 +1,8 @@
 package main
 
 import (
+	_ "athena/external"
+	_ "athena/lib"
 	"fmt"
 	"os"
 )
